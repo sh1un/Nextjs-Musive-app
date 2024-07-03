@@ -13,6 +13,19 @@ export interface CoverImage {
   color: string;
 }
 
+export interface Song {
+  id: number;
+  duration: number;
+  track_name: string;
+  src: string;
+  cover_image: {
+    url: string;
+    color: string;
+  };
+  artist_name: string;
+  artist_id: number;
+}
+
 export const toTrackProps = (tracks: any): TrackProps[] => {
   return tracks.map((track: any) => {
     return {
