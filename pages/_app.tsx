@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import store from "../stores/store";
 import NextNProgress from "nextjs-progressbar";
 import { useRouter } from "next/router";
@@ -11,8 +11,37 @@ import "react-toastify/dist/ReactToastify.css";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
 import AddToCollectionModel from "@/components/AddToCollectionModel";
 import { ToastContainer } from "react-toastify";
+import { useEffect, useRef } from "react";
+import homePageApi from "../stores/homePage/homePageApi";
+import { Song } from "@/interfaces/Track";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const audioElements = useRef<Map<number, HTMLAudioElement>>(new Map());
+
+  useEffect(() => {
+    // Fetch random songs and preload them
+    const fetchAndPreloadSongs = async () => {
+      try {
+        const { topHits } = await homePageApi.getRandomArtists();
+        preloadSongs(topHits);
+      } catch (error) {
+        console.error("Error fetching random songs:", error);
+      }
+    };
+
+    const preloadSongs = (songs: Song[]) => {
+      songs.forEach((song) => {
+        const audio = new Audio();
+        audio.src = song.src;
+        audio.load();
+        audioElements.current.set(song.id, audio);
+        console.log(`Preloading song: ${song.track_name}`);
+      });
+    };
+
+    fetchAndPreloadSongs();
+  }, []);
+
   return (
     <Provider store={store}>
       <Head>
@@ -98,4 +127,5 @@ function AudioPlayerComponent() {
     </div>
   );
 }
+
 export default MyApp;
