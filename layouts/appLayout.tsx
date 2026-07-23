@@ -48,6 +48,10 @@ function AppLayout({ children, title, color, onScroll }: any) {
             <div className="px-4 mt-8">
               <SidebarItem name="home" label="Home" />
               <SidebarItem name="search" label="Search" />
+              <SidebarItem name="create" label="AI Music" />
+              <SidebarItem name="friends" label="Friends" />
+              <SidebarItem name="rooms" label="Listening Rooms" />
+              <SidebarItem name="upload" label="Upload Music" />
               <SidebarItem name="library" label="Your Library" />
               <div className="my-6 border-b border-slate-800 "></div>
               <div

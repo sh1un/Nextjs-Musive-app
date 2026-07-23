@@ -11,6 +11,12 @@ import "react-toastify/dist/ReactToastify.css";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
 import AddToCollectionModel from "@/components/AddToCollectionModel";
 import { ToastContainer } from "react-toastify";
+import ListeningActivityReporter from "@/components/ListeningActivityReporter";
+import { FriendsPresenceProvider } from "@/components/FriendsPresenceProvider";
+import {
+  RoomSessionProvider,
+  useRoomSession,
+} from "@/components/RoomSessionProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -45,14 +51,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         options={{ showSpinner: false }}
       />
 
-      <Component {...pageProps} />
-      <AudioPlayerComponent />
+      <FriendsPresenceProvider>
+        <RoomSessionProvider>
+          <Component {...pageProps} />
+          <ListeningActivityReporter />
+          <AudioPlayerComponent />
+        </RoomSessionProvider>
+      </FriendsPresenceProvider>
     </Provider>
   );
 }
 
 function AudioPlayerComponent() {
   const router = useRouter();
+  const { room } = useRoomSession();
   const isKeyboardOpen = useDetectKeyboardOpen();
   return (
     <div>
@@ -72,6 +84,8 @@ function AudioPlayerComponent() {
       {router.pathname !== "/login" &&
       router.pathname !== "/register" &&
       router.pathname !== "/_error" &&
+      router.pathname !== "/rooms/[code]" &&
+      !room &&
       router.pathname !== "/" ? (
         <AudioPlayer className={isKeyboardOpen ? "invisible" : "visible"} />
       ) : (
@@ -88,9 +102,13 @@ function AudioPlayerComponent() {
         isKeyboardOpen ? "invisible" : "visible"
       }`}
           >
-            <div className="flex flex-row justify-center ">
+            <div className="scrollbar flex flex-row justify-start overflow-x-auto px-2">
               <SidebarItem name="home" label="Home" />
               <SidebarItem name="search" label="Search" />
+              <SidebarItem name="create" label="AI Music" />
+              <SidebarItem name="friends" label="Friends" />
+              <SidebarItem name="rooms" label="Rooms" />
+              <SidebarItem name="upload" label="Upload" />
               <SidebarItem name="library" label="Library" />
             </div>
           </div>

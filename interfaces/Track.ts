@@ -6,6 +6,9 @@ export interface TrackProps {
   cover_image: CoverImage;
   artist_name: string;
   artist_id: number;
+  type?: "audio" | "youtube";
+  video_id?: string;
+  source_url?: string;
 }
 
 export interface CoverImage {

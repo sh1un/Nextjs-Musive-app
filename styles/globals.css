@@ -119,6 +119,28 @@ i {
   content: "\e900";
   color: #fff;
 }
+.icon-create:before,
+.icon-create-filled:before {
+  content: "\e900";
+  color: #fff;
+}
+.icon-friends:before,
+.icon-friends-filled:before {
+  content: "\e909";
+  color: #fff;
+}
+.icon-rooms:before,
+.icon-rooms-filled:before {
+  content: "\e914";
+  color: #fff;
+}
+.icon-upload:before,
+.icon-upload-filled:before {
+  content: "\e912";
+  color: #fff;
+  transform: rotate(180deg);
+  display: inline-block;
+}
 .icon-home-filled:before {
   content: "\e901";
   color: #fff;
@@ -205,6 +227,310 @@ input[type="range"]:hover::-webkit-slider-thumb {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.friend-listening-card {
+  box-shadow:
+    0 0 0 1px rgba(52, 211, 153, 0.08),
+    0 18px 55px rgba(16, 185, 129, 0.1);
+  animation: friend-card-breathe 2.8s ease-in-out infinite;
+}
+
+.friend-nav-live::before {
+  content: "";
+  position: absolute;
+  inset: -0.42rem;
+  border: 1px solid rgba(52, 211, 153, 0.42);
+  border-radius: 9999px;
+  pointer-events: none;
+  animation: friend-nav-ring 1.8s ease-out infinite;
+}
+
+.friend-nav-live i::before {
+  color: rgb(110 231 183);
+}
+
+.friend-nav-count {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.7rem;
+  display: flex;
+  min-width: 1.05rem;
+  height: 1.05rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  background: rgb(52 211 153);
+  padding: 0 0.2rem;
+  color: #052e24;
+  font-family: "ProximaNova Bold";
+  font-size: 0.6rem;
+  line-height: 1;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.55);
+  animation: friend-nav-badge-pop 2.2s ease-in-out infinite;
+}
+
+.friend-nav-online-dot {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.35rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  background: rgb(52 211 153);
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.5);
+}
+
+.room-nav-live::before {
+  content: "";
+  position: absolute;
+  inset: -0.42rem;
+  border: 1px solid rgba(167, 139, 250, 0.55);
+  border-radius: 9999px;
+  pointer-events: none;
+  animation: room-nav-ring 1.8s ease-out infinite;
+}
+
+.room-nav-live > i::before {
+  color: rgb(196 181 253);
+}
+
+.room-nav-equalizer {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.75rem;
+  display: flex;
+  width: 1.2rem;
+  height: 1.2rem;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1px;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  background: rgb(139 92 246);
+  padding: 0.22rem;
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.75);
+}
+
+.room-nav-equalizer i {
+  width: 2px;
+  min-height: 3px;
+  border-radius: 9999px;
+  background: white;
+  transform-origin: bottom;
+  animation: room-nav-wave 0.7s ease-in-out infinite alternate;
+}
+
+.room-nav-equalizer i:nth-child(2) {
+  animation-delay: -0.45s;
+}
+
+.room-nav-equalizer i:nth-child(3) {
+  animation-delay: -0.2s;
+}
+
+@keyframes room-nav-ring {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.72);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+@keyframes room-nav-wave {
+  from {
+    height: 30%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+.room-floating-reaction {
+  position: absolute;
+  bottom: 7rem;
+  z-index: 10;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: room-reaction-float 2.6s ease-out forwards;
+}
+
+.friend-listening-glow {
+  background: radial-gradient(
+    circle at 85% 0%,
+    rgba(52, 211, 153, 0.18),
+    transparent 42%
+  );
+  animation: friend-glow-drift 4s ease-in-out infinite alternate;
+}
+
+.friend-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(52, 211, 153, 0.28);
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.13);
+  padding: 0.3rem 0.55rem;
+  color: rgb(110 231 183);
+  font-family: "ProximaNova Bold";
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.friend-live-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: rgb(52 211 153);
+  box-shadow: 0 0 0 rgba(52, 211, 153, 0.4);
+  animation: friend-live-ping 1.6s ease-out infinite;
+}
+
+.friend-album-pulse {
+  box-shadow: 0 0 22px rgba(52, 211, 153, 0.22);
+  animation: friend-album-float 2.4s ease-in-out infinite;
+}
+
+.friend-equalizer {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  width: 22px;
+  height: 20px;
+}
+
+.friend-equalizer i {
+  width: 3px;
+  min-height: 4px;
+  border-radius: 9999px;
+  background: white;
+  transform-origin: bottom;
+  animation: friend-equalizer-wave 0.8s ease-in-out infinite alternate;
+}
+
+.friend-equalizer i:nth-child(2) {
+  animation-delay: -0.55s;
+}
+
+.friend-equalizer i:nth-child(3) {
+  animation-delay: -0.3s;
+}
+
+.friend-equalizer i:nth-child(4) {
+  animation-delay: -0.7s;
+}
+
+@keyframes friend-card-breathe {
+  0%,
+  100% {
+    border-color: rgba(52, 211, 153, 0.3);
+  }
+  50% {
+    border-color: rgba(110, 231, 183, 0.62);
+  }
+}
+
+@keyframes friend-nav-ring {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.72);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes friend-nav-badge-pop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes room-reaction-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5) rotate(-8deg);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1.2) rotate(6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-210px) scale(1) rotate(-4deg);
+  }
+}
+
+@keyframes friend-glow-drift {
+  from {
+    opacity: 0.55;
+    transform: translate3d(2%, -3%, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(-2%, 3%, 0) scale(1.06);
+  }
+}
+
+@keyframes friend-live-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+  }
+  75%,
+  100% {
+    box-shadow: 0 0 0 7px rgba(52, 211, 153, 0);
+  }
+}
+
+@keyframes friend-album-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes friend-equalizer-wave {
+  from {
+    height: 25%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .friend-listening-card,
+  .friend-listening-glow,
+  .friend-live-dot,
+  .friend-album-pulse,
+  .friend-equalizer i,
+  .friend-nav-live::before,
+  .friend-nav-count,
+  .room-floating-reaction {
+    animation: none;
+  }
+
+  .friend-equalizer i {
+    height: 60%;
   }
 }
 
